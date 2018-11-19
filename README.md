@@ -25,5 +25,5 @@ docker,mesos
 ```
 
 ```
-docker run -it --rm --net=host --pid=host -e TINI_SUBREAPER=true -e CURRENT_IP=<current_ip> -e SPARK_MASTER="<MESOS_MASTER_URL>" <SPARK_IMAGE> bash
+docker run -it --rm --net=host -e CURRENT_IP=<CURRENT_IP> -e SPARK_MASTER="<MESOS_MASTER_URL>" <SPARK_IMAGE> bash
 ```
