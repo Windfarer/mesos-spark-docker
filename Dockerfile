@@ -38,8 +38,6 @@ COPY scripts /scripts
 
 ENV PYSPARK_DRIVER_PYTHON python3
 
-WORKDIR /spark
-
 ENTRYPOINT ["/scripts/run.sh"]
 
 CMD [ "bash" ]

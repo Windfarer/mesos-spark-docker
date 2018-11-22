@@ -4,11 +4,6 @@ SPARK_MASTER=${SPARK_MASTER:-local}
 MESOS_EXECUTOR_CORE=${MESOS_EXECUTOR_CORE:-0.1}
 SPARK_IMAGE=${SPARK_IMAGE}
 
-sed -i 's;SPARK_MASTER;'$SPARK_MASTER';g' /spark/conf/spark-defaults.conf
-sed -i 's;MESOS_EXECUTOR_CORE;'$MESOS_EXECUTOR_CORE';g' /spark/conf/spark-defaults.conf
-sed -i 's;SPARK_IMAGE;'$SPARK_IMAGE';g' /spark/conf/spark-defaults.conf
-sed -i 's;PUBLIC_IP;'$PUBLIC_IP';g' /spark/conf/spark-defaults.conf
-
 export SPARK_LOCAL_IP=${SPARK_LOCAL_IP:-${PUBLIC_IP:-"127.0.0.1"}}
 export SPARK_PUBLIC_DNS=${SPARK_PUBLIC_DNS:-${SPARK_PUBLIC_DNS:-"127.0.0.1"}}
 
@@ -17,4 +12,4 @@ then
         echo "spark.mesos.executor.docker.volumes: $ADDITIONAL_VOLUMES" >> /spark/conf/spark-defaults.conf
 fi
 
-exec "$@"
+exec $@
