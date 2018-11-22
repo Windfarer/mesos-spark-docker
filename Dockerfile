@@ -9,7 +9,6 @@ ENV PYTHONHASHSEED 1
 
 ENV SPARK_HOME /spark
 ENV PYSPARK_DRIVER_PYTHON python3
-ENV SPARK_IMAGE <SPARK_IMAGE>
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 RUN export OS_DISTRO=debian && \
@@ -19,14 +18,9 @@ RUN export OS_DISTRO=debian && \
     apt-get -y update
 
 RUN apt-get -y install mesos
-RUN apt-get -y install curl
+RUN apt-get -y install curl libcurl3-nss
 
 RUN apt-get -y install python3 python3-setuptools python3-pip
-
-RUN apt-get -y install libcurl3-nss
-
-ADD https://raw.githubusercontent.com/guilhem/apt-get-install/master/apt-get-install /usr/bin/
-RUN chmod +x /usr/bin/apt-get-install
 
 RUN wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
       && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
