@@ -36,8 +36,4 @@ RUN wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPAR
 COPY spark-conf/* /spark/conf/
 COPY scripts /scripts
 
-ENV PYSPARK_DRIVER_PYTHON python3
-
-ENTRYPOINT ["/scripts/run.sh"]
-
 CMD [ "bash" ]
