@@ -37,5 +37,6 @@ COPY scripts /scripts
 
 ARG SPARK_IMAGE
 RUN if [ ! -z ${SPARK_IMAGE} ]; then echo "spark.mesos.executor.docker.image ${SPARK_IMAGE}" >> /spark/conf/spark-defaults.conf; else echo "SPARK_IMAGE must be set with --build-arg during docker build" >&2 && exit 1; fi
+ENV SPARK_IMAGE=${SPARK_IMAGE}
 
 CMD [ "bash" ]
