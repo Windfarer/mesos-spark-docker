@@ -1,27 +1,19 @@
 ```
-#/etc/default/mesos-master
-
-PORT=5050
-ZK=`cat /etc/mesos/zk`
+echo "PORT=5050
+ZK=`cat /etc/mesos/zk`" > /etc/default/mesos-master
 ```
 
 ```
-#/etc/default/mesos-slave
-
-MASTER=`cat /etc/mesos/zk`
-ISOLATION=cgroups/cpu,cgroups/mem,docker/runtime,filesystem/linux
+echo "MASTER=`cat /etc/mesos/zk`
+ISOLATION=cgroups/cpu,cgroups/mem,docker/runtime,filesystem/linux" > /etc/default/mesos-slave
 ```
 
 ```
-# /etc/mesos-slave/containerizers
-
-docker,mesos
+echo "docker" > /etc/mesos-slave/containerizers
 ```
 
 ```
-# /etc/mesos-slave/executor_registration_timeout
-
-5mins
+echo "5mins" > /etc/mesos-slave/executor_registration_timeout
 ```
 
 ```
