@@ -1,4 +1,4 @@
-FROM java:8
+FROM openjdk:8
 
 ENV SPARK_VERSION=2.4.0
 ENV HADOOP_VERSION=2.7
@@ -12,10 +12,13 @@ ENV PYSPARK_DRIVER_PYTHON python3
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
 RUN export OS_DISTRO=debian && \
-    export OS_CODENAME=jessie && \
+    export OS_CODENAME=stretch && \
     echo "deb http://repos.mesosphere.io/${OS_DISTRO} ${OS_CODENAME} main" | \
     tee /etc/apt/sources.list.d/mesosphere.list &&\
     apt-get -y update
+
+# fake systemctl
+RUN echo exit 0 > /usr/bin/systemctl && chmod +x /usr/bin/systemctl
 
 RUN apt-get -y install mesos
 RUN apt-get -y install curl libcurl3-nss
