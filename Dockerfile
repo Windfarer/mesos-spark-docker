@@ -3,6 +3,9 @@ FROM openjdk:8
 ENV SPARK_VERSION=2.4.0
 ENV HADOOP_VERSION=2.7
 
+ENV OS_DISTRO=debian
+ENV OS_CODENAME=stretch
+
 # Fix the value of PYTHONHASHSEED
 # Note: this is needed when you use Python 3.3 or greater
 ENV PYTHONHASHSEED 1
@@ -11,9 +14,7 @@ ENV SPARK_HOME /spark
 ENV PYSPARK_DRIVER_PYTHON python3
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv E56151BF
-RUN export OS_DISTRO=debian && \
-    export OS_CODENAME=stretch && \
-    echo "deb http://repos.mesosphere.io/${OS_DISTRO} ${OS_CODENAME} main" | \
+RUN echo "deb http://repos.mesosphere.io/${OS_DISTRO} ${OS_CODENAME} main" | \
     tee /etc/apt/sources.list.d/mesosphere.list &&\
     apt-get -y update
 
