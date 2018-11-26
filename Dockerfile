@@ -31,12 +31,13 @@ RUN wget http://apache.mirror.iphh.net/spark/spark-${SPARK_VERSION}/spark-${SPAR
       && mv spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION} spark \
       && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz 
 
-
 COPY spark-conf/* /spark/conf/
 COPY scripts /scripts
+
+RUN ln -s /spark/bin/* /bin/
 
 ARG SPARK_IMAGE
 RUN if [ ! -z ${SPARK_IMAGE} ]; then echo "spark.mesos.executor.docker.image ${SPARK_IMAGE}" >> /spark/conf/spark-defaults.conf; else echo "SPARK_IMAGE must be set with --build-arg during docker build" >&2 && exit 1; fi
 ENV SPARK_IMAGE=${SPARK_IMAGE}
 
-CMD [ "bash" ]
+CMD "/scripts/dispatcher.sh" 

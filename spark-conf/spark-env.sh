@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 export SPARK_MASTER=${SPARK_MASTER:-local}
 export MESOS_EXECUTOR_CORE=${MESOS_EXECUTOR_CORE:-0.1}
